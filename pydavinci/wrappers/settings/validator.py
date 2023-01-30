@@ -1,13 +1,15 @@
+import logging
 from typing import TYPE_CHECKING, Callable, Dict, Optional, Union
 
 import pydantic.main
 from pydantic import BaseModel, validator
 
-import pydavinci.logger as log
 from pydavinci.wrappers.settings.map import SETTINGS_MAP, super_scale_transform
 
 if TYPE_CHECKING:
     from pydantic.fields import ModelField
+
+log = logging.getLogger(__name__)
 
 
 # monkey patch to get underscore fields

@@ -1,8 +1,10 @@
+import logging
+
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
 
 from typing_extensions import Literal, TypeAlias, TypedDict
 
-import pydavinci.logger as log
+log = logging.getLogger(__name__)
 
 if TYPE_CHECKING:
     from pydavinci.wrappers._resolve_stubs import (

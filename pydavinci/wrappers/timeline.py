@@ -1,6 +1,6 @@
+import logging
 from typing import TYPE_CHECKING, Any, Dict, List, Optional, Union
 
-import pydavinci.logger as log
 from pydavinci.exceptions import TimelineNotFound
 from pydavinci.main import resolve_obj
 from pydavinci.utils import TRACK_ERROR, TRACK_TYPES, get_resolveobjs, is_resolve_obj
@@ -14,6 +14,7 @@ if TYPE_CHECKING:
     from pydavinci.wrappers._resolve_stubs import PyRemoteTimeline
     from pydavinci.wrappers.settings.constructor import TimelineSettings
 
+log = logging.getLogger(__name__)
 
 class Timeline(object):
     def __init__(self, *args: Any) -> None:

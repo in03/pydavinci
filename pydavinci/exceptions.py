@@ -1,7 +1,7 @@
+import logging
 from typing import Optional
 
-import pydavinci.logger as log
-
+log = logging.getLogger(__name__)
 
 class ObjectNotFound(BaseException):
     pass
