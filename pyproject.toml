@@ -3,68 +3,52 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "pydavinci-18"
-dynamic = ["version"]
-description = "Fork of PyDavinci supporting Resolve 18"
+name = "pydavinci"
+version = "0.3.1"
+description = "A lightly opinionated DaVinci Resolve Python API wrapper"
 readme = "README.md"
-license = ""
-requires-python = ">=3.10.0,<4.0.0"
+requires-python = ">=3.12"
+license = "MIT"
 authors = [
     { name = "Caleb Trevatt", email = "sk188okj@duck.com" },
 ]
 classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Multimedia :: Video :: Non-Linear Editor",
 ]
 dependencies = [
-    "loguru>=0.6.0",
-    "pydantic>=1.9.0",
+    "pydantic>=2.10.6",
+    "rich>=13.0.0",
     "typing_extensions>=4.1.1",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "mypy",
-    "black",
-    "ruff",
-    "pre-commit",
-    "pytest",
+    "black>=22.3.0",
+    "ruff>=0.0.254",
+    "pre-commit>=2.18.1",
+    "pytest>=7.1.2",
+    "mypy>=0.942",
 ]
 docs = [
-    "pydavinci[dev]",
-    "mkdocs",
-    "mkdocs-autorefs",
-    "mkdocs-material-extensions",
-    "mkdocstrings",
-    "mkdocstrings-python",
+    "mkdocs>=1.3.0",
+    "mkdocs-autorefs>=0.4.1",
+    "mkdocs-material>=8.2.9",
+    "mkdocs-material-extensions>=1.0.3",
+    "mkdocstrings>=0.18.1",
+    "mkdocstrings-python>=0.6.6",
 ]
 
 [project.urls]
 Homepage = "https://github.com/in03/pydavinci"
 Source = "https://github.com/in03/pydavinci"
 Documentation = "https://in03.github.io/pydavinci/resolve"
-Changelog = "https://github.com/in03/pydavinci/tags"
-
-[tool.hatch.version]
-path = "src/pydavinci/__init__.py"
-
-[tool.hatch.envs.docs]
-detached = true
-dependencies = [
-    "pydavinci[docs]"
-]
-[tool.hatch.build]
-sources = ["src"]
-
-[tool.hatch.build.targets.sdist]
-include = [
-    "pydavinci",
-]
-[tool.hatch.build.targets.wheel]
-include = [
-    "pydavinci",
-]
 
 [tool.mypy]
 strict = true
@@ -77,7 +61,6 @@ warn_return_any = false
 warn_unused_ignores = false
 show_error_codes = true
 ignore_missing_imports = true
-
 [tool.black]
 line_length = 100
 include = '\.pyi?$'
@@ -95,8 +78,33 @@ exclude = '''
 )/
 '''
 
-[tool.pytest.ini_options]
-addopts = [
-    "--import-mode=importlib",
+[tool.ruff]
+select = [
+    "B",   # flake8-bugbear
+    "C",   # mccabe
+    "F",   # pyflakes
+    "W",   # pycodestyle warnings
+    "TCH", # flake8-type-checking
+    "B9",  # flake8-bugbear optional rules
 ]
-pythonpath = "src"
+ignore = [
+    "E501",  # line length
+    "F403",  # star imports
+    "N805",  # self argument
+    "N804",  # first argument of classmethod
+    "W293",  # blank line contains whitespace
+]
+src = ["src"]
+unfixable = ["B"]
+
+[tool.ruff.mccabe]
+max-complexity = 18
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["E402"]
+
+[tool.hatch.version]
+path = "src/pydavinci/__init__.py"
+
+[tool.hatch.build]
+packages = ["src/pydavinci"]
