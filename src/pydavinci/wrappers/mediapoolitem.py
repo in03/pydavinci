@@ -209,5 +209,14 @@ class MediaPoolItem:
         """
         return self._obj.GetUniqueId()
 
+    def transcribe_audio(self) -> bool:
+        """
+        Transcribes audio of the MediaPoolItem
+
+        Returns:
+            bool: True if successful
+        """
+        return self._obj.TranscribeAudio()
+
     def __repr__(self) -> str:
         return f'MediaPoolItem(Name:"{self.name})"'

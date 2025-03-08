@@ -305,25 +305,22 @@ class Project:
                 for single clip and individual clips, respectively.'
             )
 
-    def available_resolutions(
-        self, format: Optional[str] = None, codec: Optional[str] = None
-    ) -> List[Dict[Any, Any]]:
-        """Returns list of resolutions applicable for the given render ``format`` and render ``codec``.
-
-        Returns full list of resolutions if no argument is provided.
-        Each element in the list is a dictionary with 2 keys "Width" and "Height".
+    def get_render_resolutions(
+        self, 
+        format: Optional[str] = None, 
+        codec: Optional[str] = None
+    ) -> List[Dict[str, int]]:
+        """
+        Gets available render resolutions for specified format and codec
 
         Args:
-            format (str): render format
-            codec (str): render codec
+            format (Optional[str]): render format
+            codec (Optional[str]): render codec
 
         Returns:
-            List of available resolutions
+            List[Dict[str, int]]: List of available render resolutions
         """
-        if format and codec is None:
-            return self._obj.GetRenderResolutions()
-        else:
-            return self._obj.GetRenderResolutions(format, codec)
+        return self._obj.GetRenderResolutions(format, codec)
 
     def is_rendering(self) -> bool:
         """

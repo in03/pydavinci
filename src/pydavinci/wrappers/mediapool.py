@@ -314,3 +314,44 @@ class MediaPool:
             str: Unique ID
         """
         return self._obj.GetUniqueId()
+
+    def insert_audio_to_current_track_at_playhead(
+        self, 
+        media_path: str, 
+        start_offset_in_samples: int, 
+        duration_in_samples: int
+    ) -> bool:
+        """
+        Insert audio clip to current track at playhead position
+
+        Args:
+            media_path (str): path to audio file
+            start_offset_in_samples (int): start offset in samples
+            duration_in_samples (int): duration in samples
+
+        Returns:
+            bool: True if successful
+        """
+        return self._obj.InsertAudioToCurrentTrackAtPlayhead(
+            media_path, 
+            start_offset_in_samples, 
+            duration_in_samples
+        )
+
+    def refresh_lut_list(self) -> bool:
+        """
+        Refreshes LUT list
+
+        Returns:
+            bool: True if successful
+        """
+        return self._obj.RefreshLUTList()
+
+    def refresh_folders(self) -> bool:
+        """
+        Refreshes folders in media pool
+
+        Returns:
+            bool: True if successful
+        """
+        return self._obj.RefreshFolders()
